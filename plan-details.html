@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PolicyPick - Plan Details</title>
+
+  <!-- Linking the CSS for this page -->
+  <link rel="stylesheet" href="plan-details.css" />
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">🛡️ Policy<span>Pick</span></div>
+    <a href="compare.html" class="nav-link">← Back to Compare</a>
+  </nav>
+
+  <!-- Page Title -->
+  <div class="hero">
+    <h1 id="planTitle">Plan Details</h1>
+    <p id="planSubtitle">Loading plan information...</p>
+  </div>
+
+  <!-- Plan Info Card – filled by JavaScript -->
+  <div class="details-container">
+
+    <!-- Left Side: Main Info -->
+    <div class="card" id="mainCard">
+      <h2>📋 Plan Overview</h2>
+      <table class="info-table" id="infoTable">
+        <!-- Rows are added by JS -->
+      </table>
+    </div>
+
+    <!-- Right Side: What's Covered -->
+    <div class="card" id="coverCard">
+      <h2>✅ What's Covered</h2>
+      <ul id="coverList">
+        <!-- Items added by JS -->
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Pricing Section -->
+  <div class="pricing-section">
+    <h2>💰 Pricing</h2>
+    <div class="pricing-cards">
+
+      <div class="price-card">
+        <p class="price-label">Monthly Premium</p>
+        <p class="price-amount" id="monthlyPrice">-</p>
+        <p class="price-note">Billed every month</p>
+      </div>
+
+      <div class="price-card highlight">
+        <p class="price-label">Yearly Premium</p>
+        <p class="price-amount" id="yearlyPrice">-</p>
+        <p class="price-note">Save up to 10% vs monthly 🎉</p>
+      </div>
+
+    </div>
+
+    <!-- No-claim bonus note -->
+    <p class="bonus-note" id="bonusNote"></p>
+  </div>
+
+  <footer class="footer">
+    <p>© 2025 PolicyPick &nbsp;|&nbsp; B.Tech CSE Project – Sem II</p>
+  </footer>
+
+  <!-- Linking JS file for this page -->
+  <script src="plan-details.js"></script>
+
+</body>
+</html>

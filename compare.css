@@ -1,0 +1,420 @@
+/* =============================================
+   compare.css  –  Styles for compare.html
+   PolicyPick | B.Tech CSE Sem II Project
+   Dark glassmorphism theme with neon accents
+   ============================================= */
+
+/* Google Fonts – Syne for headings, DM Sans for body */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap');
+
+/* ---- CSS Variables (easy to change colors from one place) ---- */
+:root {
+  --bg-dark:      #080c14;
+  --bg-card:      rgba(255, 255, 255, 0.04);
+  --border:       rgba(255, 255, 255, 0.08);
+  --accent:       #00d4ff;
+  --accent2:      #7c3aed;
+  --accent-glow:  rgba(0, 212, 255, 0.25);
+  --text-primary: #f0f4ff;
+  --text-muted:   #8896aa;
+  --yes-bg:       rgba(0, 230, 118, 0.12);
+  --yes-text:     #00e676;
+  --no-bg:        rgba(255, 82, 82, 0.12);
+  --no-text:      #ff5252;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  min-height: 100vh;
+
+  /* Animated background gradient mesh */
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(0, 212, 255, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 110%, rgba(124, 58, 237, 0.15) 0%, transparent 60%);
+}
+
+/* ---- Page Load Fade-in Animation ---- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* =====================
+   NAVBAR
+   ===================== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  /* Frosted glass effect */
+  background: rgba(8, 12, 20, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+}
+
+/* The glowing dot in logo */
+.logo span {
+  color: var(--accent);
+}
+
+.nav-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 20px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  transition: all 0.25s ease;
+}
+
+.nav-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+/* =====================
+   HERO SECTION
+   ===================== */
+.hero {
+  text-align: center;
+  padding: 64px 20px 32px;
+  animation: fadeUp 0.7s ease both;
+}
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.15;
+
+  /* Gradient text */
+  background: linear-gradient(135deg, #ffffff 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero p {
+  margin-top: 12px;
+  font-size: 16px;
+  color: var(--text-muted);
+}
+
+/* =====================
+   FILTER SECTION
+   ===================== */
+.filter-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 24px 32px;
+  max-width: 960px;
+  margin: 0 auto 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  animation: fadeUp 0.7s 0.1s ease both;
+}
+
+.filter-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 200px;
+}
+
+.filter-box label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ---- Slider ---- */
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  background: var(--border);
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 24px var(--accent);
+}
+
+/* ---- Toggle Buttons ---- */
+.toggle-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.toggle-btn {
+  padding: 8px 18px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toggle-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #000;
+  font-weight: 600;
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.toggle-btn:hover:not(.active) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* =====================
+   TABLE WRAPPER
+   ===================== */
+.table-wrapper {
+  overflow-x: auto;
+  max-width: 1100px;
+  margin: 0 auto 32px;
+  padding: 0 20px;
+  animation: fadeUp 0.7s 0.2s ease both;
+
+  /* Custom scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) transparent;
+}
+
+.table-wrapper::-webkit-scrollbar {
+  height: 4px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+/* =====================
+   TABLE
+   ===================== */
+#compareTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+}
+
+/* ---- Sticky Header ---- */
+#compareTable thead th {
+  position: sticky;
+  top: 57px;
+  background: rgba(8, 12, 20, 0.92);
+  backdrop-filter: blur(20px);
+  padding: 20px 16px;
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  z-index: 10;
+  transition: color 0.2s;
+}
+
+#compareTable thead th:first-child {
+  text-align: left;
+  color: var(--text-muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Glow on header column hover */
+#compareTable thead th.plan-col:hover {
+  color: var(--accent);
+}
+
+/* ---- Table Body Cells ---- */
+#compareTable tbody td {
+  padding: 14px 16px;
+  font-size: 13px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+  transition: background 0.15s;
+}
+
+#compareTable tbody td:first-child {
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+/* Row hover highlight */
+#compareTable tbody tr:hover td {
+  background: rgba(0, 212, 255, 0.04);
+}
+
+/* Remove border from last row */
+#compareTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ---- Price Cells ---- */
+.price {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--accent);
+}
+
+/* ---- Plan Tag Labels ---- */
+.plan-tag {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 100px;
+  margin-top: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.plan-tag.starter { background: rgba(136,136,136,0.15); color: #aaa; border: 1px solid rgba(136,136,136,0.3); }
+.plan-tag.youth   { background: rgba(0,212,255,0.12);   color: var(--accent);  border: 1px solid rgba(0,212,255,0.3); }
+.plan-tag.popular { background: rgba(255,196,0,0.12);   color: #ffc400; border: 1px solid rgba(255,196,0,0.3); }
+.plan-tag.family  { background: rgba(0,230,118,0.12);   color: #00e676; border: 1px solid rgba(0,230,118,0.3); }
+.plan-tag.premium { background: rgba(124,58,237,0.15);  color: #b77cff; border: 1px solid rgba(124,58,237,0.4); }
+.plan-tag.senior  { background: rgba(255,138,0,0.12);   color: #ff8a00; border: 1px solid rgba(255,138,0,0.3); }
+
+/* ---- Yes / No Badges ---- */
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.badge.yes {
+  background: var(--yes-bg);
+  color: var(--yes-text);
+  border: 1px solid rgba(0, 230, 118, 0.25);
+}
+
+.badge.no {
+  background: var(--no-bg);
+  color: var(--no-text);
+  border: 1px solid rgba(255, 82, 82, 0.2);
+}
+
+/* ---- Detail Button ---- */
+.detail-btn {
+  display: inline-block;
+  padding: 7px 18px;
+  background: transparent;
+  color: var(--accent);
+  text-decoration: none;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid rgba(0, 212, 255, 0.35);
+  transition: all 0.2s ease;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.detail-btn:hover {
+  background: var(--accent);
+  color: #000;
+  box-shadow: 0 0 20px var(--accent-glow);
+  border-color: var(--accent);
+}
+
+/* ---- No Plans Warning ---- */
+#noPlansMsg {
+  display: none;
+  text-align: center;
+  color: #ff5252;
+  font-size: 14px;
+  margin: 0 auto 24px;
+  padding: 14px 24px;
+  background: rgba(255, 82, 82, 0.08);
+  border: 1px solid rgba(255, 82, 82, 0.2);
+  border-radius: 12px;
+  max-width: 480px;
+}
+
+/* =====================
+   FOOTER
+   ===================== */
+.footer {
+  text-align: center;
+  padding: 28px 20px;
+  font-size: 12px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  margin-top: 20px;
+  letter-spacing: 0.5px;
+}

@@ -1,0 +1,247 @@
+/* =============================================
+   all-plans.css  –  Styles for all-plans.html
+   PolicyPick | B.Tech CSE Sem II Project
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --bg-dark:     #080c14;
+  --bg-card:     rgba(255, 255, 255, 0.04);
+  --border:      rgba(255, 255, 255, 0.08);
+  --accent:      #00d4ff;
+  --accent-glow: rgba(0, 212, 255, 0.25);
+  --text-primary:#f0f4ff;
+  --text-muted:  #8896aa;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(0,212,255,0.1) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 110%, rgba(124,58,237,0.12) 0%, transparent 60%);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Navbar ---- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(8, 12, 20, 0.75);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.logo span { color: var(--accent); }
+
+.nav-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 20px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  transition: all 0.25s;
+}
+
+.nav-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+/* ---- Hero ---- */
+.hero {
+  text-align: center;
+  padding: 60px 20px 32px;
+  animation: fadeUp 0.6s ease both;
+}
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, #ffffff, var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero p {
+  margin-top: 10px;
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+/* ---- Cards Grid ---- */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+
+/* ---- Individual Plan Card ---- */
+.plan-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  backdrop-filter: blur(12px);
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+
+.plan-card:hover {
+  border-color: rgba(0, 212, 255, 0.3);
+  box-shadow: 0 0 40px rgba(0, 212, 255, 0.08);
+  transform: translateY(-4px);
+}
+
+/* Highlighted card for popular plan */
+.popular-card {
+  border-color: rgba(0, 212, 255, 0.3);
+  background: rgba(0, 212, 255, 0.04);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.07);
+}
+
+/* Card header area */
+.card-top {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-top h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.tagline {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* ---- Plan Tag Badges ---- */
+.plan-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  width: fit-content;
+}
+
+.plan-tag.starter { background: rgba(136,136,136,0.15); color: #aaa;    border: 1px solid rgba(136,136,136,0.3); }
+.plan-tag.youth   { background: rgba(0,212,255,0.12);   color: #00d4ff; border: 1px solid rgba(0,212,255,0.3); }
+.plan-tag.popular { background: rgba(255,196,0,0.12);   color: #ffc400; border: 1px solid rgba(255,196,0,0.3); }
+.plan-tag.family  { background: rgba(0,230,118,0.12);   color: #00e676; border: 1px solid rgba(0,230,118,0.3); }
+.plan-tag.premium { background: rgba(124,58,237,0.15);  color: #b77cff; border: 1px solid rgba(124,58,237,0.4); }
+.plan-tag.senior  { background: rgba(255,138,0,0.12);   color: #ff8a00; border: 1px solid rgba(255,138,0,0.3); }
+
+/* ---- Price Display ---- */
+.card-price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.card-price .price {
+  font-family: 'Syne', sans-serif;
+  font-size: 34px;
+  font-weight: 800;
+  color: var(--accent);
+  text-shadow: 0 0 20px var(--accent-glow);
+}
+
+.card-price .per {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ---- Feature List ---- */
+.card-features {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  flex: 1;
+}
+
+.card-features li {
+  font-size: 13px;
+  color: var(--text-primary);
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--border);
+}
+
+.card-features li:last-child {
+  border-bottom: none;
+}
+
+/* ---- View Details Button ---- */
+.view-btn {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  border-radius: 12px;
+  background: transparent;
+  border: 1px solid rgba(0, 212, 255, 0.35);
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s;
+  margin-top: auto;
+}
+
+.view-btn:hover {
+  background: var(--accent);
+  color: #000;
+  box-shadow: 0 0 24px var(--accent-glow);
+}
+
+/* ---- Footer ---- */
+.footer {
+  text-align: center;
+  padding: 28px 20px;
+  font-size: 12px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  letter-spacing: 0.5px;
+}

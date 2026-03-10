@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PolicyPick - Compare Plans</title>
+
+  <!-- Linking our CSS file for this page -->
+  <link rel="stylesheet" href="compare.css" />
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">🛡️ Policy<span>Pick</span></div>
+    <a href="all-plans.html" class="nav-link">View All Plans</a>
+  </nav>
+
+  <!-- Hero / Intro Section -->
+  <div class="hero">
+    <h1>Compare Health Insurance Plans</h1>
+    <p>No confusing terms – just clear, simple comparisons to help you choose!</p>
+  </div>
+
+  <!-- Filter Controls Section -->
+  <div class="filter-section">
+
+    <!-- Slider to filter plans by max monthly premium -->
+    <div class="filter-box">
+      <label for="premiumRange">
+        Max Monthly Premium: ₹<span id="rangeValue">8000</span>
+      </label>
+      <!-- Increased max to 8000 to include all 6 plans -->
+      <input type="range" id="premiumRange" min="500" max="8000" step="500" value="8000" />
+    </div>
+
+    <!-- Switch between Monthly and Yearly pricing view -->
+    <div class="filter-box">
+      <label>Pricing Mode:</label>
+      <div class="toggle-buttons">
+        <button id="btnMonthly" class="toggle-btn active" onclick="switchPricing('monthly')">Monthly</button>
+        <button id="btnYearly"  class="toggle-btn"        onclick="switchPricing('yearly')">Yearly</button>
+      </div>
+    </div>
+
+    <!-- Show or Hide the coverage detail rows -->
+    <div class="filter-box">
+      <label>Coverage Rows:</label>
+      <button id="coverageToggleBtn" class="toggle-btn active" onclick="toggleCoverage()">
+        Hide Coverage
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Comparison Table Wrapper (horizontal scroll on small screens) -->
+  <div class="table-wrapper">
+    <table id="compareTable">
+
+      <!-- Sticky Header stays visible when you scroll down -->
+      <thead>
+        <tr>
+          <th>Feature</th>
+
+          <th class="plan-col" id="col-basiccare">
+            BasicCare<br/><span class="plan-tag starter">Starter</span>
+          </th>
+          <th class="plan-col" id="col-youngindia">
+            YoungIndia<br/><span class="plan-tag youth">Youth</span>
+          </th>
+          <th class="plan-col" id="col-smartshield">
+            SmartShield<br/><span class="plan-tag popular">⭐ Popular</span>
+          </th>
+          <th class="plan-col" id="col-familyfirst">
+            FamilyFirst<br/><span class="plan-tag family">Family</span>
+          </th>
+          <th class="plan-col" id="col-premiumplus">
+            PremiumPlus<br/><span class="plan-tag premium">Premium</span>
+          </th>
+          <th class="plan-col" id="col-seniorsafe">
+            SeniorSafe<br/><span class="plan-tag senior">Senior</span>
+          </th>
+
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <!-- Price Row: values update when Monthly/Yearly is toggled -->
+        <tr id="priceRow">
+          <td>💰 Premium</td>
+          <td class="price" data-monthly="799"  data-yearly="8629">₹799/mo</td>
+          <td class="price" data-monthly="999"  data-yearly="10789">₹999/mo</td>
+          <td class="price" data-monthly="1499" data-yearly="16189">₹1499/mo</td>
+          <td class="price" data-monthly="2499" data-yearly="26989">₹2499/mo</td>
+          <td class="price" data-monthly="2999" data-yearly="32389">₹2999/mo</td>
+          <td class="price" data-monthly="5999" data-yearly="64789">₹5999/mo</td>
+        </tr>
+
+        <!-- Coverage rows – shown/hidden by toggle -->
+        <tr class="coverage-row">
+          <td>🏥 Coverage Limit</td>
+          <td>₹2 Lakh</td>
+          <td>₹3 Lakh</td>
+          <td>₹5 Lakh</td>
+          <td>₹10 Lakh</td>
+          <td>₹15 Lakh</td>
+          <td>₹20 Lakh</td>
+        </tr>
+
+        <tr class="coverage-row">
+          <td>🏨 Network Hospitals</td>
+          <td>1,200+</td>
+          <td>2,000+</td>
+          <td>4,500+</td>
+          <td>6,000+</td>
+          <td>8,000+</td>
+          <td>9,500+</td>
+        </tr>
+
+        <tr class="coverage-row">
+          <td>⏳ Waiting Period</td>
+          <td>4 Years</td>
+          <td>3 Years</td>
+          <td>2 Years</td>
+          <td>2 Years</td>
+          <td>1 Year</td>
+          <td>1 Year</td>
+        </tr>
+
+        <!-- Always-visible rows -->
+        <tr>
+          <td>🎁 No-Claim Bonus</td>
+          <td><span class="badge no">None</span></td>
+          <td><span class="badge yes">3%/yr</span></td>
+          <td><span class="badge yes">5%/yr</span></td>
+          <td><span class="badge yes">7%/yr</span></td>
+          <td><span class="badge yes">10%/yr</span></td>
+          <td><span class="badge yes">8%/yr</span></td>
+        </tr>
+
+        <tr>
+          <td>🦷 Dental Cover</td>
+          <td><span class="badge no">No</span></td>
+          <td><span class="badge no">No</span></td>
+          <td><span class="badge no">No</span></td>
+          <td><span class="badge yes">Yes</span></td>
+          <td><span class="badge yes">Yes</span></td>
+          <td><span class="badge yes">Yes</span></td>
+        </tr>
+
+        <tr>
+          <td>👁️ Vision Cover</td>
+          <td><span class="badge no">No</span></td>
+          <td><span class="badge yes">Yes</span></td>
+          <td><span class="badge yes">Yes</span></td>
+          <td><span class="badge yes">Yes</span></td>
+          <td><span class="badge yes">Yes</span></td>
+          <td><span class="badge yes">Yes</span></td>
+        </tr>
+
+        <tr>
+          <td>🤰 Maternity Cover</td>
+          <td><span class="badge no">No</span></td>
+          <td><span class="badge no">No</span></td>
+          <td><span class="badge no">No</span></td>
+          <td><span class="badge yes">Yes</span></td>
+          <td><span class="badge yes">Yes</span></td>
+          <td><span class="badge no">No</span></td>
+        </tr>
+
+        <tr>
+          <td>🧠 Mental Health</td>
+          <td><span class="badge no">No</span></td>
+          <td><span class="badge yes">Yes</span></td>
+          <td><span class="badge no">No</span></td>
+          <td><span class="badge yes">Yes</span></td>
+          <td><span class="badge yes">Yes</span></td>
+          <td><span class="badge yes">Yes</span></td>
+        </tr>
+
+        <tr>
+          <td>👴 Senior Friendly</td>
+          <td><span class="badge no">No</span></td>
+          <td><span class="badge no">No</span></td>
+          <td><span class="badge no">No</span></td>
+          <td><span class="badge no">No</span></td>
+          <td><span class="badge no">No</span></td>
+          <td><span class="badge yes">Yes</span></td>
+        </tr>
+
+        <!-- View Details buttons -->
+        <tr>
+          <td>📋 Full Details</td>
+          <td><a href="plan-details.html?plan=basiccare"   class="detail-btn">View</a></td>
+          <td><a href="plan-details.html?plan=youngindia"  class="detail-btn">View</a></td>
+          <td><a href="plan-details.html?plan=smartshield" class="detail-btn">View</a></td>
+          <td><a href="plan-details.html?plan=familyfirst" class="detail-btn">View</a></td>
+          <td><a href="plan-details.html?plan=premiumplus" class="detail-btn">View</a></td>
+          <td><a href="plan-details.html?plan=seniorsafe"  class="detail-btn">View</a></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Warning when all plans are filtered out -->
+  <p id="noPlansMsg">
+    ⚠️ No plans match this range. Please increase the premium limit.
+  </p>
+
+  <footer class="footer">
+    <p>© 2025 PolicyPick &nbsp;|&nbsp; B.Tech CSE Project – Sem II</p>
+  </footer>
+
+  <script src="compare.js"></script>
+
+</body>
+</html>
