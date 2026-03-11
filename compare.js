@@ -13,7 +13,29 @@ var planList = [
   { id: "col-seniorsafe",  price: 5999, colIndex: 7 }
 ];
 
-// slider filter
+
+// ---- 1. STICKY HEADER LOGIC ----
+// We listen to the scroll event on the window
+// When user scrolls down more than 100px, we add class "header-scrolled" to the thead
+// When they scroll back up, we remove it
+// The CSS then uses this class to change the header style
+
+var tableHead = document.querySelector("#compareTable thead");
+
+window.addEventListener("scroll", function () {
+  // window.scrollY gives how many pixels the page has been scrolled from top
+  if (window.scrollY > 100) {
+    // user has scrolled down - add the scrolled class
+    tableHead.classList.add("header-scrolled");
+  } else {
+    // user is near top - remove the class
+    tableHead.classList.remove("header-scrolled");
+  }
+});
+
+
+// ---- 2. PREMIUM RANGE FILTER ----
+
 var slider = document.getElementById("premiumRange");
 var rangeLabel = document.getElementById("rangeValue");
 
@@ -46,7 +68,9 @@ function filterByPremium() {
   msg.style.display = allHidden ? "block" : "none";
 }
 
-// monthly/yearly toggle
+
+// ---- 3. MONTHLY / YEARLY TOGGLE ----
+
 function switchPricing(mode) {
   currentMode = mode;
 
@@ -62,7 +86,9 @@ function switchPricing(mode) {
   });
 }
 
-// show/hide coverage rows
+
+// ---- 4. COVERAGE ROWS TOGGLE ----
+
 function toggleCoverage() {
   var rows = document.querySelectorAll(".coverage-row");
   var btn = document.getElementById("coverageToggleBtn");

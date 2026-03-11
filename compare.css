@@ -290,6 +290,14 @@ input[type="range"]::-webkit-slider-thumb:hover {
   color: var(--accent);
 }
 
+/* This class is added by JS when user scrolls down more than 100px */
+/* It makes the header glow slightly so user knows it is sticky */
+#compareTable thead.header-scrolled th {
+  background: rgba(0, 0, 0, 0.97);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+  box-shadow: 0 4px 24px rgba(0, 212, 255, 0.08);
+}
+
 /* ---- Table Body Cells ---- */
 #compareTable tbody td {
   padding: 14px 16px;
