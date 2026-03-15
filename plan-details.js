@@ -138,8 +138,12 @@ var plans = {
   }
 };
 
-// read plan name from URL like: plan-details.html?plan=smartshield
-// using split because URLSearchParams doesn't work with file://
+// Read plan name from URL like: plan-details.html?plan=smartshield
+//
+// We use split() instead of URLSearchParams here because
+// URLSearchParams does not work when HTML files are opened
+// directly from a folder using the file:// protocol.
+// split() works correctly in both file:// and http:// situations.
 var planKey = "basiccare";
 var query = window.location.search;
 

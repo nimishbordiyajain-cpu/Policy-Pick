@@ -3,22 +3,25 @@
 var currentMode = "monthly";
 var coverageVisible = true;
 
-// plan data with their column positions
+// Plan data: colIndex is the position of this plan's column in each table row.
+// children[0] is always the feature label (e.g. "Coverage Limit"),
+// so children[1] = BasicCare, children[2] = YoungIndia, and so on.
 var planList = [
-  { id: "col-basiccare",   price: 799,  colIndex: 2 },
-  { id: "col-youngindia",  price: 999,  colIndex: 3 },
-  { id: "col-smartshield", price: 1499, colIndex: 4 },
-  { id: "col-familyfirst", price: 2499, colIndex: 5 },
-  { id: "col-premiumplus", price: 2999, colIndex: 6 },
-  { id: "col-seniorsafe",  price: 5999, colIndex: 7 }
+  { id: "col-basiccare",   price: 799,  colIndex: 1 },
+  { id: "col-youngindia",  price: 999,  colIndex: 2 },
+  { id: "col-smartshield", price: 1499, colIndex: 3 },
+  { id: "col-familyfirst", price: 2499, colIndex: 4 },
+  { id: "col-premiumplus", price: 2999, colIndex: 5 },
+  { id: "col-seniorsafe",  price: 5999, colIndex: 6 }
 ];
 
 
 // ---- 1. STICKY HEADER LOGIC ----
-// We listen to the scroll event on the window
-// When user scrolls down more than 100px, we add class "header-scrolled" to the thead
-// When they scroll back up, we remove it
-// The CSS then uses this class to change the header style
+// When the user scrolls more than 100px down the page,
+// we add the "header-scrolled" class to the thead.
+// The CSS uses this class to make the header look more
+// distinct (darker background, accent border) so the user
+// always knows which column belongs to which plan.
 
 var tableHead = document.querySelector("#compareTable thead");
 
@@ -50,17 +53,39 @@ function filterByPremium() {
 
   for (var i = 0; i < planList.length; i++) {
     var plan = planList[i];
-    var allRows = document.querySelectorAll("#compareTable tr");
+
+    // Get ALL table rows but SKIP the price row (#priceRow)
+    // because the price row cells are updated by switchPricing()
+    // and should never be hidden by the filter
+    var allRows = document.querySelectorAll("#compareTable tr:not(#priceRow)");
+
+    var shouldShow = plan.price <= maxPremium;
 
     allRows.forEach(function(row) {
-      // get cell by column index
-      var cell = row.children[plan.colIndex - 1];
+      // children[0] = feature label column, children[1..6] = plan columns
+      // colIndex 1-6 maps directly to the correct plan cell in every row
+      var cell = row.children[plan.colIndex];
       if (cell) {
-        cell.style.display = plan.price <= maxPremium ? "" : "none";
+        cell.style.display = shouldShow ? "" : "none";
       }
     });
 
-    if (plan.price <= maxPremium) allHidden = false;
+    // Also hide/show the header column for this plan
+    var headerCol = document.getElementById(plan.id);
+    if (headerCol) {
+      headerCol.style.display = shouldShow ? "" : "none";
+    }
+
+    // Also hide/show the price row cell for this plan
+    var priceRow = document.getElementById("priceRow");
+    if (priceRow) {
+      var priceCell = priceRow.children[plan.colIndex];
+      if (priceCell) {
+        priceCell.style.display = shouldShow ? "" : "none";
+      }
+    }
+
+    if (shouldShow) allHidden = false;
   }
 
   // show msg if no plans visible
@@ -77,8 +102,8 @@ function switchPricing(mode) {
   document.getElementById("btnMonthly").classList.toggle("active", mode === "monthly");
   document.getElementById("btnYearly").classList.toggle("active", mode === "yearly");
 
-  // update all price cells
-  var priceCells = document.querySelectorAll(".price");
+  // update all price cells in the price row
+  var priceCells = document.querySelectorAll("#priceRow .price");
   priceCells.forEach(function(cell) {
     var m = cell.getAttribute("data-monthly");
     var y = cell.getAttribute("data-yearly");

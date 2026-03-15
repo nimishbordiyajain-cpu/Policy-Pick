@@ -62,6 +62,9 @@ body {
   color: var(--text-primary);
 }
 
+/* FIX: This rule was missing – makes "Pick" cyan to match other pages */
+.logo span { color: var(--accent); }
+
 .nav-link {
   color: var(--text-muted);
   text-decoration: none;
